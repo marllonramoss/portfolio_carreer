@@ -80,13 +80,13 @@ const AboutSection = () => {
             {/* Experience badges */}
             <div className="flex flex-wrap gap-3 mt-6">
               <div className="bg-zinc-800 px-3 py-1 rounded-full text-sm font-mono text-zinc-300">
-                5+ Years Experience
+                3+ Years Experience
               </div>
               <div className="bg-zinc-800 px-3 py-1 rounded-full text-sm font-mono text-zinc-300">
-                100+ Projects
+                Software Engineer
               </div>
               <div className="bg-zinc-800 px-3 py-1 rounded-full text-sm font-mono text-zinc-300">
-                Global Clients
+                Entrepreneur
               </div>
             </div>
           </motion.div>

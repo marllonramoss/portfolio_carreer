@@ -165,7 +165,7 @@
 
 .marquee-content {
   display: inline-block;
-  animation: marquee 20s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 /* Metallic border effect */
@@ -309,4 +309,29 @@
 
 .hover-shine:hover::after {
   transform: rotate(25deg) translateX(200%);
+}
+
+.hero-button-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-button-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.hero-button-shine:hover::before {
+  left: 100%;
 }

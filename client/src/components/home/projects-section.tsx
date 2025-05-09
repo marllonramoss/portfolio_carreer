@@ -5,7 +5,9 @@ import ProjectCard from "@/components/ui/project-card";
 import { projects } from "@/lib/projects-data";
 
 const ProjectsSection = () => {
-  const [ref, isVisible] = useScrollObserver<HTMLDivElement>({ threshold: 0.1 });
+  const [ref, isVisible] = useScrollObserver<HTMLDivElement>({
+    threshold: 0.1,
+  });
   const [filter, setFilter] = useState("all");
 
   const filteredProjects = projects.filter(
@@ -27,49 +29,58 @@ const ProjectsSection = () => {
             <span className="absolute -bottom-2 left-1/4 w-1/2 h-1 bg-purple-600"></span>
           </h2>
           <p className="text-lg text-zinc-300 max-w-2xl mx-auto">
-            A collection of my most significant work, showcasing a blend of technical expertise and creative design.
+            A collection of my most significant work, showcasing a blend of
+            technical expertise and creative design.
           </p>
-          
+
           {/* Filter buttons */}
           <div className="flex flex-wrap justify-center gap-3 mt-8">
-            <button 
-              className={`px-4 py-2 ${filter === 'all' ? 'bg-purple-600 text-zinc-100' : 'bg-zinc-800'} hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+            <button
+              className={`px-4 py-2 ${
+                filter === "all" ? "bg-purple-600 text-zinc-100" : "bg-zinc-800"
+              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("all")}
             >
               All Projects
             </button>
-            <button 
-              className={`px-4 py-2 ${filter === 'web' ? 'bg-purple-600 text-zinc-100' : 'bg-zinc-800'} hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+            <button
+              className={`px-4 py-2 ${
+                filter === "web" ? "bg-purple-600 text-zinc-100" : "bg-zinc-800"
+              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("web")}
             >
               Web Apps
             </button>
-            <button 
-              className={`px-4 py-2 ${filter === 'mobile' ? 'bg-purple-600 text-zinc-100' : 'bg-zinc-800'} hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+            <button
+              className={`px-4 py-2 ${
+                filter === "mobile"
+                  ? "bg-purple-600 text-zinc-100"
+                  : "bg-zinc-800"
+              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("mobile")}
             >
               Mobile
             </button>
-            <button 
-              className={`px-4 py-2 ${filter === 'design' ? 'bg-purple-600 text-zinc-100' : 'bg-zinc-800'} hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+            <button
+              className={`px-4 py-2 ${
+                filter === "design"
+                  ? "bg-purple-600 text-zinc-100"
+                  : "bg-zinc-800"
+              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("design")}
             >
               UI/UX
             </button>
           </div>
         </motion.div>
-        
+
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              delay={index}
-            />
+            <ProjectCard key={project.id} project={project} delay={index} />
           ))}
         </div>
-        
+
         {/* View More Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,11 +89,11 @@ const ProjectsSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mt-12"
         >
-          <a 
-            href="https://github.com" 
-            target="_blank" 
+          <a
+            href="https://github.com"
+            target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 border border-zinc-600 text-zinc-200 font-semibold rounded-lg hover-shine hover:border-zinc-400 transition duration-300 hover:scale-105"
+            className="inline-block px-6 py-3 border border-zinc-600 text-zinc-200 font-semibold rounded-lg hero-button-shine hover:border-zinc-400 transition duration-300 hover:scale-105"
           >
             View All Projects
           </a>
