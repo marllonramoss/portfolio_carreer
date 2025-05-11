@@ -16,7 +16,7 @@ export const frontendSkills = [
   },
   {
     name: "GSAP/Motion",
-    level: 85,
+    level: 60,
     label: "Intermediate",
   },
 ];
@@ -39,30 +39,30 @@ export const backendSkills = [
   },
   {
     name: "Prisma",
-    level: 75,
-    label: "Intermediate",
+    level: 85,
+    label: "Advanced",
   },
 ];
 
 export const designSkills = [
   {
+    name: "Domain Driven Design / Clean Architecture",
+    level: 90,
+    label: "Advanced",
+  },
+  {
     name: "UI/UX Design",
-    level: 90,
-    label: "Advanced",
+    level: 60,
+    label: "Intermediate",
   },
   {
-    name: "UX Research",
-    level: 90,
-    label: "Advanced",
+    name: "N8N",
+    level: 60,
+    label: "Intermediate",
   },
   {
-    name: "Figma",
-    level: 88,
-    label: "Advanced",
-  },
-  {
-    name: "Motion Design",
-    level: 75,
+    name: "Scrum / Kanban",
+    level: 60,
     label: "Intermediate",
   },
 ];
@@ -93,3 +93,5 @@ export const additionalSkills = [
     icon: "fas fa-mobile-alt",
   },
 ];
+
+export const othersIcon = "fas fa-tools";

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ParticlesBackground from "@/components/ui/particles-background";
+import React from "react";
 
 const technologies = [
   "REACT",
@@ -126,68 +127,44 @@ const HeroSection = () => {
         <div className="marquee">
           <div className="marquee-content">
             {technologies.map((tech, index) => (
-              <>
-                <span
-                  key={`tech-${index}`}
-                  className="font-mono text-sm text-zinc-400 mx-4"
-                >
+              <React.Fragment key={`group-${index}`}>
+                <span className="font-mono text-sm text-zinc-400 mx-4">
                   {tech}
                 </span>
                 {index < technologies.length - 1 && (
-                  <span
-                    key={`dot-${index}`}
-                    className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"
-                  ></span>
+                  <span className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"></span>
                 )}
-              </>
+              </React.Fragment>
             ))}
             {technologies.map((tech, index) => (
-              <>
-                <span
-                  key={`tech-repeat-${index}`}
-                  className="font-mono text-sm text-zinc-400 mx-4"
-                >
+              <React.Fragment key={`group-repeat-${index}`}>
+                <span className="font-mono text-sm text-zinc-400 mx-4">
                   {tech}
                 </span>
                 {index < technologies.length - 1 && (
-                  <span
-                    key={`dot-repeat-${index}`}
-                    className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"
-                  ></span>
+                  <span className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"></span>
                 )}
-              </>
+              </React.Fragment>
             ))}
             {technologies.map((tech, index) => (
-              <>
-                <span
-                  key={`tech-repeat-2-${index}`}
-                  className="font-mono text-sm text-zinc-400 mx-4"
-                >
+              <React.Fragment key={`group-repeat-2-${index}`}>
+                <span className="font-mono text-sm text-zinc-400 mx-4">
                   {tech}
                 </span>
                 {index < technologies.length - 1 && (
-                  <span
-                    key={`dot-repeat-2-${index}`}
-                    className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"
-                  ></span>
+                  <span className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"></span>
                 )}
-              </>
+              </React.Fragment>
             ))}
             {technologies.map((tech, index) => (
-              <>
-                <span
-                  key={`tech-repeat-3-${index}`}
-                  className="font-mono text-sm text-zinc-400 mx-4"
-                >
+              <React.Fragment key={`group-repeat-3-${index}`}>
+                <span className="font-mono text-sm text-zinc-400 mx-4">
                   {tech}
                 </span>
                 {index < technologies.length - 1 && (
-                  <span
-                    key={`dot-repeat-3-${index}`}
-                    className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"
-                  ></span>
+                  <span className="inline-block w-2 h-2 bg-zinc-500 rounded-full mx-1"></span>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
