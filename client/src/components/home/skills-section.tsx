@@ -7,6 +7,8 @@ import {
   additionalSkills,
   othersIcon,
 } from "@/lib/skills-data";
+import { useLanguage } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
 
 const SkillBar = ({
   skill,
@@ -45,6 +47,9 @@ const SkillsSection = () => {
   const [ref, isVisible] = useScrollObserver<HTMLDivElement>({
     threshold: 0.1,
   });
+  
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <section id="skills" className="py-24 relative bg-grain">
@@ -57,12 +62,11 @@ const SkillsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-zinc-100 relative inline-block">
-            SKILLS & EXPERTISE
+            {t.skills.title}
             <span className="absolute -bottom-2 left-1/4 w-1/2 h-1 bg-purple-600"></span>
           </h2>
           <p className="text-lg text-zinc-300 max-w-2xl mx-auto">
-            My technical toolbox combines both frontend and backend technologies
-            with a focus on modern, scalable solutions.
+            {t.skills.subtitle}
           </p>
         </motion.div>
 
@@ -80,7 +84,7 @@ const SkillsSection = () => {
                 <i className="fas fa-laptop-code text-purple-600 text-xl"></i>
               </div>
               <h3 className="text-xl font-display font-bold text-zinc-100">
-                FRONTEND
+                {t.skills.frontend}
               </h3>
             </div>
 
@@ -110,7 +114,7 @@ const SkillsSection = () => {
                 <i className="fas fa-server text-purple-600 text-xl"></i>
               </div>
               <h3 className="text-xl font-display font-bold text-zinc-100">
-                BACKEND
+                {t.skills.backend}
               </h3>
             </div>
 
@@ -140,7 +144,7 @@ const SkillsSection = () => {
                 <i className="fas fa-tools text-purple-600 text-xl"></i>
               </div>
               <h3 className="text-xl font-display font-bold text-zinc-100">
-                OTHERS
+                {t.skills.others}
               </h3>
             </div>
 
@@ -167,7 +171,7 @@ const SkillsSection = () => {
             transition={{ duration: 0.5 }}
             className="text-xl font-display font-bold text-zinc-100 mb-8 text-center"
           >
-            ADDITIONAL EXPERTISE
+            {t.skills.additionalExpertise}
           </motion.h3>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import ParticlesBackground from "@/components/ui/particles-background";
 import React from "react";
+import { useLanguage } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
 
 const technologies = [
   "REACT",
@@ -15,6 +17,9 @@ const technologies = [
 ];
 
 const HeroSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <section
       id="hero"
@@ -59,7 +64,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8 }}
                 className="block"
               >
-                FULL STACK
+                {t.hero.title[0]}
               </motion.span>
               <motion.span
                 initial={{ opacity: 0 }}
@@ -67,7 +72,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="block"
               >
-                DEVELOPER
+                {t.hero.title[1]}
               </motion.span>
             </motion.h1>
 
@@ -77,8 +82,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="text-xl md:text-2xl font-body text-zinc-300 max-w-2xl mx-auto mb-12"
             >
-              Crafting digital experiences with a blend of technical precision
-              and artistic vision
+              {t.hero.subtitle}
             </motion.p>
 
             <motion.div
@@ -100,7 +104,7 @@ const HeroSection = () => {
                 }}
                 className="px-6 py-4 bg-gradient-to-r from-purple-600 to-purple-800 text-zinc-100 font-semibold rounded-lg hero-button-shine hover:shadow-xl transition duration-300 hover:scale-105"
               >
-                View My Work
+                {t.hero.viewWorkButton}
               </button>
               <button
                 onClick={() => {
@@ -115,7 +119,7 @@ const HeroSection = () => {
                 }}
                 className="px-6 py-4 border border-zinc-600 text-zinc-200 font-semibold rounded-lg hero-button-shine hover:border-zinc-400 transition duration-300 hover:scale-105"
               >
-                Let's Connect
+                {t.hero.connectButton}
               </button>
             </motion.div>
           </div>

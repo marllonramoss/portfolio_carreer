@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
+import { useLanguage } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
 
 const AboutSection = () => {
   const [ref, isVisible] = useScrollObserver<HTMLDivElement>({
     threshold: 0.1,
   });
+  
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <section id="about" className="py-24 relative bg-zinc-900">
@@ -16,32 +21,25 @@ const AboutSection = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-zinc-100 relative inline-block">
-              ABOUT ME
+              {t.about.title}
               <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-purple-600"></span>
             </h2>
 
             <p className="text-lg text-zinc-300 mb-6">
-              I'm a passionate Full Stack Developer with a unique blend of
-              technical expertise and creative vision. My approach combines
-              cutting-edge technologies with artistic design principles to
-              create digital experiences that stand out.
+              {t.about.paragraph1}
             </p>
 
             <p className="text-lg text-zinc-300 mb-6">
-              With a strong foundation in both frontend and backend development,
-              I bridge the gap between visual aesthetics and functional
-              engineering. My work is focused on creating applications that are
-              not only technically robust but also visually compelling and
-              intuitive to use.
+              {t.about.paragraph2}
             </p>
 
             <div className="mt-8 flex flex-col md:flex-row gap-4">
               <div className="flex items-center bg-zinc-800 px-4 py-3 rounded-lg">
                 <i className="fas fa-code text-purple-600 mr-3 text-xl"></i>
                 <div>
-                  <h3 className="font-medium text-zinc-200">Clean Code</h3>
+                  <h3 className="font-medium text-zinc-200">{t.about.cleanCode.title}</h3>
                   <p className="text-sm text-zinc-400">
-                    Elegant, efficient, maintainable
+                    {t.about.cleanCode.description}
                   </p>
                 </div>
               </div>
@@ -49,9 +47,9 @@ const AboutSection = () => {
               <div className="flex items-center bg-zinc-800 px-4 py-3 rounded-lg">
                 <i className="fas fa-paint-brush text-purple-600 mr-3 text-xl"></i>
                 <div>
-                  <h3 className="font-medium text-zinc-200">Creative Design</h3>
+                  <h3 className="font-medium text-zinc-200">{t.about.creativeDesign.title}</h3>
                   <p className="text-sm text-zinc-400">
-                    Innovative, distinctive interfaces
+                    {t.about.creativeDesign.description}
                   </p>
                 </div>
               </div>
@@ -80,13 +78,13 @@ const AboutSection = () => {
             {/* Experience badges */}
             <div className="flex flex-wrap gap-3 mt-6">
               <div className="bg-zinc-800 px-3 py-1 rounded-full text-sm font-mono text-zinc-300">
-                3+ Years Experience
+                {t.about.badges.experience}
               </div>
               <div className="bg-zinc-800 px-3 py-1 rounded-full text-sm font-mono text-zinc-300">
-                Software Engineer
+                {t.about.badges.role}
               </div>
               <div className="bg-zinc-800 px-3 py-1 rounded-full text-sm font-mono text-zinc-300">
-                Entrepreneur
+                {t.about.badges.entrepreneur}
               </div>
             </div>
           </motion.div>

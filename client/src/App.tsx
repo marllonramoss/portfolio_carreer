@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import ScrollProgress from "@/components/ui/scroll-progress";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
+import { LanguageProvider } from "@/contexts/language-context";
 
 function Router() {
   const [location] = useLocation();
@@ -29,9 +30,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <ScrollProgress />
-        <Toaster />
-        <Router />
+        <LanguageProvider>
+          <ScrollProgress />
+          <Toaster />
+          <Router />
+        </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

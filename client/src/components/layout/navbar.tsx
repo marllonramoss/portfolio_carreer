@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import LanguageSelector from "@/components/ui/language-selector";
+import { useLanguage } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,25 +66,25 @@ const Navbar = () => {
             onClick={() => scrollToSection("about")}
             className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
           >
-            About
+            {t.nav.about}
           </button>
           <button
             onClick={() => scrollToSection("skills")}
             className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
           >
-            Skills
+            {t.nav.skills}
           </button>
           <button
             onClick={() => scrollToSection("projects")}
             className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
           >
-            Projects
+            {t.nav.projects}
           </button>
           <button
             onClick={() => scrollToSection("contact")}
             className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
           >
-            Contact
+            {t.nav.contact}
           </button>
           <LanguageSelector />
         </div>
@@ -108,25 +112,25 @@ const Navbar = () => {
               onClick={() => scrollToSection("about")}
               className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"
             >
-              About
+              {t.nav.about}
             </button>
             <button
               onClick={() => scrollToSection("skills")}
               className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"
             >
-              Skills
+              {t.nav.skills}
             </button>
             <button
               onClick={() => scrollToSection("projects")}
               className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"
             >
-              Projects
+              {t.nav.projects}
             </button>
             <button
               onClick={() => scrollToSection("contact")}
               className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"
             >
-              Contact
+              {t.nav.contact}
             </button>
             <div className="border-t border-zinc-800 pt-3 mt-2">
               <LanguageSelector />
