@@ -9,6 +9,7 @@ import ScrollProgress from "@/components/ui/scroll-progress";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { LanguageProvider } from "@/contexts/language-context";
+import { PortfolioAssistant } from "@/components/PortfolioAssistant";
 
 function Router() {
   const [location] = useLocation();
@@ -34,6 +35,7 @@ function App() {
           <ScrollProgress />
           <Toaster />
           <Router />
+          <PortfolioAssistant />
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
