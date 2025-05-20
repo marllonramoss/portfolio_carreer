@@ -69,7 +69,7 @@ const AboutSection = () => {
             {/* Main image with metallic border effect */}
             <div className="metallic-border">
               <img
-                src="https://uploaddeimagens.com.br/images/004/897/058/full/Design_sem_nome.png?1746726024"
+                src="https://res.cloudinary.com/du55aj4g9/image/upload/v1747492417/marllon_picture_real_jw9biq.jpg"
                 alt="Developer portrait"
                 className="w-[800px] h-[800px] object-cover object-top rounded-lg"
               />

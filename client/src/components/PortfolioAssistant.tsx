@@ -4,7 +4,7 @@ import { Card } from "./ui/card";
 import { Input } from "./ui/input";
 import { Avatar } from "./ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
-import { Send, MessagesSquare, X } from "lucide-react";
+import { Send, MessageCircle, X } from "lucide-react";
 import { sendMessageToAssistant } from '../lib/services/assistant';
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from '@/contexts/language-context';
@@ -262,7 +262,7 @@ export function PortfolioAssistant() {
               size="lg"
               className="rounded-full w-14 h-14 shadow-lg bg-primary hover:bg-primary/90 p-0"
             >
-              <MessagesSquare className="h-8 w-8 stroke-[1.5]" />
+              <MessageCircle className="h-9 w-9 stroke-[2]" />
             </Button>
             {hasUnread && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
