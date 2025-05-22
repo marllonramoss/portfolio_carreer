@@ -168,7 +168,7 @@ export function PortfolioAssistant() {
                   <div className="relative">
                     <Avatar className="h-10 w-10">
                       <AvatarImage 
-                        src="https://res-console.cloudinary.com/du55aj4g9/thumbnails/v1/image/upload/v1747492521/Q2hhdEdQVF9JbWFnZV8xNl8wNV8yMDI1XzE3XzU3XzUxX3J4bGg1YQ==/drilldown" 
+                        src="https://res.cloudinary.com/du55aj4g9/image/upload/v1747492521/ChatGPT_Image_16_05_2025_17_57_51_rxlh5a.png" 
                         alt="Maia AI Assistant"
                         className="object-cover"
                         style={{
