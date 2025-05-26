@@ -37,16 +37,20 @@ const ProjectsSection = () => {
           <div className="flex flex-wrap justify-center gap-3 mt-8">
             <button
               className={`px-4 py-2 ${
-                filter === "all" ? "bg-purple-600 text-zinc-100" : "bg-zinc-800"
-              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+                filter === "all" 
+                  ? "bg-purple-600 text-zinc-100 hover:bg-purple-600" 
+                  : "bg-zinc-800 hover:bg-zinc-700"
+              } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("all")}
             >
               All Projects
             </button>
             <button
               className={`px-4 py-2 ${
-                filter === "web" ? "bg-purple-600 text-zinc-100" : "bg-zinc-800"
-              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+                filter === "web" 
+                  ? "bg-purple-600 text-zinc-100 hover:bg-purple-600" 
+                  : "bg-zinc-800 hover:bg-zinc-700"
+              } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("web")}
             >
               Web Apps
@@ -54,9 +58,9 @@ const ProjectsSection = () => {
             <button
               className={`px-4 py-2 ${
                 filter === "mobile"
-                  ? "bg-purple-600 text-zinc-100"
-                  : "bg-zinc-800"
-              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+                  ? "bg-purple-600 text-zinc-100 hover:bg-purple-600" 
+                  : "bg-zinc-800 hover:bg-zinc-700"
+              } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("mobile")}
             >
               Mobile
@@ -64,9 +68,9 @@ const ProjectsSection = () => {
             <button
               className={`px-4 py-2 ${
                 filter === "design"
-                  ? "bg-purple-600 text-zinc-100"
-                  : "bg-zinc-800"
-              } hover:bg-zinc-700 rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
+                  ? "bg-purple-600 text-zinc-100 hover:bg-purple-600" 
+                  : "bg-zinc-800 hover:bg-zinc-700"
+              } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("design")}
             >
               UI/UX
