@@ -42,7 +42,7 @@ type TranslationKeys = {
 export const translations: Record<'pt-BR' | 'en-US', TranslationKeys> = {
   'en-US': {
     hero: {
-      title: ['FULL STACK rsrs', 'DEVELOPER'],
+      title: ['FULL STACK rsrs2', 'DEVELOPER'],
       subtitle: 'Crafting digital experiences with a blend of technical precision and artistic vision',
       viewWorkButton: 'View My Work',
       connectButton: 'Let\'s Connect',
