@@ -6,7 +6,7 @@ interface AssistantResponse {
 export async function sendMessageToAssistant(message: string, language: 'pt-BR' | 'en-US'): Promise<AssistantResponse> {
   try {
     // TODO: Substituir com a URL real do seu webhook n8n
-    const response = await fetch('https://n8n.marllonramos.com:5678/webhook/9b1965ca-db86-4540-9c75-2380800d345e', {
+    const response = await fetch('https://n8n.marllonramos.com/webhook/44566794-485a-4bbf-95c0-329fab3b0138', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
