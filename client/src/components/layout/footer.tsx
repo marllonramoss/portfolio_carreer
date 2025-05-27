@@ -15,23 +15,20 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <a href="#hero" className="text-xl font-display tracking-wider text-zinc-200">
-              DEVELOPER
+              MARLLON RAMOS
             </a>
-            <p className="text-sm text-zinc-500 mt-2">Full Stack Developer & Designer</p>
+            <p className="text-sm text-zinc-500 mt-2">Full Stack Web Developer</p>
           </div>
           
           <div className="flex items-center space-x-6">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
+            <a href="https://github.com/marllonramoss" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
               <i className="fab fa-github"></i>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
+            <a href="https://www.linkedin.com/in/marllonramos" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
               <i className="fab fa-linkedin-in"></i>
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
-              <i className="fab fa-dribbble"></i>
+            <a href="https://wa.me/5521989399832" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">
+              <i className="fab fa-whatsapp"></i>
             </a>
           </div>
         </div>

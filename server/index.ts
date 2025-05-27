@@ -1,7 +1,16 @@
+import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from 'path';
+
+// Log environment variables at startup
+// console.log('Environment variables:', {
+//   NODE_ENV: process.env.NODE_ENV,
+//   hasWebhookUrl: !!process.env.N8N_WEBHOOK_URL,
+//   webhookUrl: process.env.N8N_WEBHOOK_URL, // Logging the actual URL to verify
+//   hasApiKey: !!process.env.N8N_API_KEY
+// });
 
 // In production, we'll use process.cwd() as the base directory
 const BASE_DIR = process.cwd();

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from '@/contexts/language-context';
+import { createPortal } from 'react-dom';
 
 const languages = [
   {
@@ -22,10 +23,25 @@ const LanguageSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Encontrar o idioma atual para exibir no botão
   const currentLanguage = languages.find(lang => lang.code === language) || languages[1];
+
+  // Atualizar posição do dropdown quando o botão é clicado
+  useEffect(() => {
+    if (isOpen && buttonRef.current && containerRef.current) {
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      const containerRect = containerRef.current.getBoundingClientRect();
+      
+      if (dropdownRef.current) {
+        dropdownRef.current.style.top = `${buttonRect.height + 8}px`;
+        dropdownRef.current.style.right = '0';
+      }
+    }
+  }, [isOpen]);
 
   // Mostrar tooltip após 3 segundos e escondê-lo após 6 segundos
   useEffect(() => {
@@ -47,6 +63,8 @@ const LanguageSelector = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node) &&
         dropdownRef.current && 
         !dropdownRef.current.contains(event.target as Node) &&
         tooltipRef.current &&
@@ -73,8 +91,9 @@ const LanguageSelector = () => {
   };
 
   return (
-    <div ref={dropdownRef} className="relative z-50">
+    <div ref={containerRef} className="relative">
       <button
+        ref={buttonRef}
         onClick={toggleDropdown}
         className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-zinc-800/70 hover:bg-zinc-700/70 transition-colors duration-200"
         aria-label="Selecionar idioma"
@@ -127,11 +146,12 @@ const LanguageSelector = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={dropdownRef}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full right-0 mt-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[120px]"
+            className="absolute bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[120px] z-[1000]"
           >
             {languages.map((lang) => (
               <button

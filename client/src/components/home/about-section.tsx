@@ -71,7 +71,7 @@ const AboutSection = () => {
               <img
                 src="https://res.cloudinary.com/du55aj4g9/image/upload/v1747492417/marllon_picture_real_jw9biq.jpg"
                 alt="Developer portrait"
-                className="w-[800px] h-[800px] object-cover object-top rounded-lg"
+                className="w-full h-[400px] md:h-[600px] object-cover object-[center_15%] rounded-lg"
               />
             </div>
 

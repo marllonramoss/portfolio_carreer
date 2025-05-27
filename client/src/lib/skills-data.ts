@@ -81,7 +81,7 @@ export const additionalSkills = [
     icon: "fas fa-cloud",
   },
   {
-    name: "CI/CD",
+    name: "N8N",
     icon: "fas fa-wrench",
   },
   {

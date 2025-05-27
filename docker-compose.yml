@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - N8N_WEBHOOK_URL=${N8N_WEBHOOK_URL}  # URL do webhook do chat assistant
+      - N8N_CONTACT_WEBHOOK_URL=${N8N_CONTACT_WEBHOOK_URL}  # URL do webhook do formulário de contato
+    restart: always 

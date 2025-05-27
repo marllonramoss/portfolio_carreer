@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-zinc-900 text-zinc-100">
+    <div className="bg-zinc-900 text-zinc-100 mobile-nav-container">
       <Navbar />
       <HeroSection />
       <AboutSection />

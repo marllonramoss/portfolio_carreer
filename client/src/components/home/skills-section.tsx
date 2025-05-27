@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
+import { useEffect } from "react";
 import {
   frontendSkills,
   backendSkills,
@@ -34,10 +35,17 @@ const SkillBar = ({
         <span className="text-zinc-400 text-sm">{label}</span>
       </div>
       <div className="w-full bg-zinc-700 rounded-full h-2">
-        <div
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true }}
+          transition={{ 
+            duration: 1,
+            delay: delay + 0.2,
+            ease: "easeOut"
+          }}
           className="bg-purple-600 h-2 rounded-full"
-          style={{ width: `${level}%` }}
-        ></div>
+        />
       </div>
     </motion.li>
   );

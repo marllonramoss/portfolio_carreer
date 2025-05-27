@@ -74,6 +74,11 @@
   }
 }
 
+/* Prevenir scroll horizontal em dispositivos móveis */
+.mobile-nav-container {
+  @apply max-w-full overflow-x-hidden;
+}
+
 /* Animation utilities */
 @layer utilities {
   .animation-delay-200 {

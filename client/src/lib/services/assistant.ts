@@ -1,3 +1,5 @@
+import { apiRequest } from '../queryClient';
+
 interface AssistantResponse {
   message: string;
   error?: string;
@@ -5,24 +7,12 @@ interface AssistantResponse {
 
 export async function sendMessageToAssistant(message: string, language: 'pt-BR' | 'en-US'): Promise<AssistantResponse> {
   try {
-    // TODO: Substituir com a URL real do seu webhook n8n
-    const response = await fetch('https://n8n.marllonramos.com/webhook/44566794-485a-4bbf-95c0-329fab3b0138', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        message,
-        language // Enviando o idioma para o n8n
-      }),
+    const response = await apiRequest('POST', '/api/assistant', { 
+      message,
+      language
     });
 
-    if (!response.ok) {
-      throw new Error('Falha na comunicação com o assistente');
-    }
-
     const data = await response.json();
-    // Usando o campo 'output' da resposta da API
     return { message: data.output };
   } catch (error) {
     console.error('Erro ao enviar mensagem para o assistente:', error);
