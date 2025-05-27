@@ -130,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       });
 
-      let { message, language } = req.body;
+      let { message, language, sessionId } = req.body;
       
       // Sanitize input
       message = sanitizeInput(message?.trim() || '');
@@ -198,7 +198,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ message, language }),
+          body: JSON.stringify({ message, language, sessionId }),
         });
 
         if (!n8nResponse.ok) {
