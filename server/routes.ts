@@ -49,6 +49,54 @@ const cooldownMiddleware = (req: Request, res: Response, next: Function) => {
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API endpoints
+  app.post("/api/visitor-stats", [messageLimiter, cooldownMiddleware], async (req: Request, res: Response) => {
+    try {
+      const { type, email } = req.body;
+
+      // Validate required fields
+      if (!type || !['curious', 'recruiter'].includes(type)) {
+        return res.status(400).json({
+          message: "Invalid visitor type"
+        });
+      }
+
+      // Validate environment variables
+      const webhookUrl = process.env.N8N_VISITOR_WEBHOOK_URL;
+      if (!webhookUrl) {
+        console.error('N8N_VISITOR_WEBHOOK_URL not set');
+        return res.status(503).json({
+          message: "Service temporarily unavailable"
+        });
+      }
+
+      // Send data to n8n webhook
+      const n8nResponse = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          type,
+          email,
+          timestamp: new Date().toISOString()
+        })
+      });
+
+      if (!n8nResponse.ok) {
+        throw new Error(`Failed to register visitor: ${n8nResponse.statusText}`);
+      }
+
+      res.status(200).json({
+        message: "Visitor registered successfully"
+      });
+    } catch (error) {
+      console.error('Error registering visitor:', error);
+      res.status(500).json({
+        message: error instanceof Error ? error.message : "Failed to register visitor"
+      });
+    }
+  });
+
   app.post("/api/contact", [messageLimiter, cooldownMiddleware], async (req: Request, res: Response) => {
     try {
       const { method, contactInfo, name, message } = req.body;

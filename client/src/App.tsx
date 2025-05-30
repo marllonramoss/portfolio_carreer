@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
+import ProjectPage from "@/pages/project/[id]";
 import ScrollProgress from "@/components/ui/scroll-progress";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
@@ -22,6 +23,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/project/:id" component={ProjectPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -32,10 +34,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <LanguageProvider>
-          <ScrollProgress />
-          <Toaster />
-          <Router />
-          <PortfolioAssistant />
+          <div className="min-h-screen bg-zinc-900">
+            <ScrollProgress />
+            <Toaster />
+            <Router />
+            <PortfolioAssistant />
+          </div>
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
