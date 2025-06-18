@@ -64,6 +64,10 @@ type TranslationKeys = {
       responseTime: string;
     };
   };
+  featuredProjects: {
+    title: string;
+    description: string;
+  };
 };
 
 export const translations: Record<'pt-BR' | 'en-US', TranslationKeys> = {
@@ -133,6 +137,10 @@ export const translations: Record<'pt-BR' | 'en-US', TranslationKeys> = {
         responseTime: "Average response time: < 5 minutes",
       },
     },
+    featuredProjects: {
+      title: "FEATURED PROJECTS",
+      description: "A collection of my most significant work, showcasing a blend of technical expertise and creative design."
+    },
   },
   'pt-BR': {
     hero: {
@@ -199,6 +207,10 @@ export const translations: Record<'pt-BR' | 'en-US', TranslationKeys> = {
         sendingButton: "Enviando...",
         responseTime: "Tempo médio de resposta: < 5 minutos",
       },
+    },
+    featuredProjects: {
+      title: "PROJETOS EM DESTAQUE",
+      description: "Uma coleção dos meus trabalhos mais significativos, demonstrando uma combinação de expertise técnica e design criativo."
     },
   },
 }; 

@@ -1,5 +1,6 @@
 import { useParams, Link } from "wouter";
 import { projects } from "@/lib/projects-data";
+import { projectsTranslations } from "@/lib/projects-translations";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, Github, ExternalLink, Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
@@ -38,11 +39,12 @@ export default function ProjectPage() {
   const project = projects.find((p) => p.id === Number(id));
   const { language } = useLanguage();
   const t = translations[language];
+  const projectTranslation = project ? projectsTranslations[language][project.id] : null;
   const [activeTab, setActiveTab] = useState<ContentTab>("overview");
   const [selectedImage, setSelectedImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!project) {
+  if (!project || !projectTranslation) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center bg-zinc-900">
         <div className="text-center">
@@ -115,7 +117,7 @@ export default function ProjectPage() {
                   <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                     <div className="flex items-center gap-4">
                       <h1 className="text-4xl md:text-5xl font-display font-bold text-zinc-100">
-                        {project.title}
+                        {projectTranslation.title}
                       </h1>
                       <span className="px-4 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm">
                         {project.type}
@@ -195,7 +197,7 @@ export default function ProjectPage() {
                     </div>
                   </div>
                   <p className="text-xl text-zinc-300 max-w-3xl">
-                    {project.shortDescription}
+                    {projectTranslation.shortDescription}
                   </p>
                 </motion.div>
               </div>
@@ -259,25 +261,25 @@ export default function ProjectPage() {
                     <div className="md:col-span-2">
                       <div className="prose prose-invert max-w-none">
                         <p className="text-zinc-300 whitespace-pre-line">
-                          {project.longDescription}
+                          {projectTranslation.longDescription}
                         </p>
 
                         {/* Features */}
                         <div className="mt-12">
-                          <h3 className="text-xl font-bold text-zinc-100 mb-6">Key Features</h3>
-                          <div className="grid sm:grid-cols-2 gap-8">
-                            {project.features.map((feature, index) => (
+                          <h3 className="text-xl font-bold text-zinc-100 mb-4">Key Features</h3>
+                          <div className="flex flex-col gap-3">
+                            {projectTranslation.features.map((feature, index) => (
                               <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="bg-zinc-800/30 rounded-xl p-6"
+                                className="bg-zinc-800/30 rounded-lg px-4 py-3 border border-zinc-700/50 hover:border-purple-500/30 transition-colors"
                               >
-                                <h4 className="text-lg font-bold text-zinc-100 mb-4">
+                                <h4 className="text-lg font-body text-purple-400 mb-2">
                                   {feature.title}
                                 </h4>
-                                <ul className="space-y-2">
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                   {feature.items.map((item, itemIndex) => (
                                     <li
                                       key={itemIndex}
@@ -326,32 +328,36 @@ export default function ProjectPage() {
                 {activeTab === "gallery" && (
                   <motion.div
                     key="gallery"
-                    className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    className="md:col-span-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {project.gallery.map((image, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="relative aspect-video overflow-hidden rounded-xl cursor-pointer group"
-                        onClick={() => {
-                          setSelectedImage(index);
-                          setIsModalOpen(true);
-                        }}
-                      >
-                        <img
-                          src={image}
-                          alt={`Gallery image ${index + 1}`}
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </motion.div>
-                    ))}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {project.gallery.map((image, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="relative aspect-video rounded-lg overflow-hidden cursor-pointer group"
+                          onClick={() => {
+                            setSelectedImage(index);
+                            setIsModalOpen(true);
+                          }}
+                        >
+                          <img
+                            src={image}
+                            alt={`Gallery image ${index + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span className="text-white text-lg font-medium">View Image</span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -362,7 +368,6 @@ export default function ProjectPage() {
         <Footer />
       </motion.div>
 
-      {/* Image Modal */}
       <ImageModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

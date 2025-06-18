@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import ProjectCard from "@/components/ui/project-card";
 import { projects } from "@/lib/projects-data";
+import { useLanguage } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
 import {
   Tooltip,
   TooltipContent,
@@ -15,6 +17,8 @@ const ProjectsSection = () => {
     threshold: 0.1,
   });
   const [filter, setFilter] = useState("all");
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const filteredProjects = projects.filter(
     (project) => filter === "all" || project.category === filter
@@ -31,12 +35,11 @@ const ProjectsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-zinc-100 relative inline-block">
-            FEATURED PROJECTS
+            {t.featuredProjects.title}
             <span className="absolute -bottom-2 left-1/4 w-1/2 h-1 bg-purple-600"></span>
           </h2>
           <p className="text-lg text-zinc-300 max-w-2xl mx-auto">
-            A collection of my most significant work, showcasing a blend of
-            technical expertise and creative design.
+            {t.featuredProjects.description}
           </p>
 
           {/* Filter buttons */}
@@ -49,7 +52,7 @@ const ProjectsSection = () => {
               } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("all")}
             >
-              All Projects
+              {language === "pt-BR" ? "Todos os Projetos" : "All Projects"}
             </button>
             <button
               className={`px-4 py-2 ${
@@ -59,7 +62,7 @@ const ProjectsSection = () => {
               } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("web")}
             >
-              Web Apps
+              {language === "pt-BR" ? "Aplicações Web" : "Web Apps"}
             </button>
             <button
               className={`px-4 py-2 ${
@@ -69,7 +72,7 @@ const ProjectsSection = () => {
               } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
               onClick={() => setFilter("design")}
             >
-              UI/UX
+              {language === "pt-BR" ? "UI/UX" : "UI/UX"}
             </button>
           </div>
         </motion.div>
@@ -96,14 +99,17 @@ const ProjectsSection = () => {
                   className="inline-block px-6 py-3 border border-zinc-600 text-zinc-500 font-semibold rounded-lg cursor-not-allowed opacity-50"
                   disabled
                 >
-                  View All Projects
+                  {language === "pt-BR" ? "Ver Todos os Projetos" : "View All Projects"}
                 </button>
               </TooltipTrigger>
-              <TooltipContent>
-                <p>Em breve. Subindo novos projetos.</p>
+              <TooltipContent className="hidden md:block">
+                <p>{language === "pt-BR" ? "Em breve. Subindo novos projetos." : "Coming soon. Adding new projects."}</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+          <p className="text-sm text-zinc-500 mt-2 md:hidden">
+            {language === "pt-BR" ? "Em breve. Subindo novos projetos." : "Coming soon. Adding new projects."}
+          </p>
         </motion.div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { Project } from "@/lib/projects-data";
+import { projectsTranslations } from "@/lib/projects-translations";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
@@ -10,6 +11,7 @@ import {
   TooltipTrigger,
 } from "./tooltip";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/language-context";
 
 type ProjectCardProps = {
   project: Project;
@@ -21,6 +23,8 @@ const ProjectCard = ({ project, className, delay = 0 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout>();
+  const { language } = useLanguage();
+  const projectTranslation = projectsTranslations[language][project.id];
 
   useEffect(() => {
     if (videoRef.current) {
@@ -91,9 +95,9 @@ const ProjectCard = ({ project, className, delay = 0 }: ProjectCardProps) => {
           
           <img
             src={project.mainImage}
-            alt={project.title}
+            alt={projectTranslation.title}
             className={cn(
-              "w-full h-64 object-cover transition-all duration-500",
+              "w-full h-80 object-cover transition-all duration-500",
               isHovered ? "opacity-0" : "opacity-100 group-hover:scale-110"
             )}
           />
@@ -103,23 +107,28 @@ const ProjectCard = ({ project, className, delay = 0 }: ProjectCardProps) => {
             isHovered ? "opacity-95" : "opacity-90 group-hover:opacity-70"
           )}></div>
           
-          <div className="absolute bottom-0 left-0 w-full p-6">
-            <span className="text-xs font-mono text-purple-500 uppercase tracking-wider">
+          <div className="absolute bottom-0 left-0 w-full p-8">
+            <span className="text-sm font-mono text-purple-500 uppercase tracking-wider">
               {project.type}
             </span>
-            <h3 className="text-xl font-display font-bold text-zinc-100 mt-2">
-              {project.title}
+            <h3 className="text-2xl font-display font-bold text-zinc-100 mt-3">
+              {projectTranslation.title}
             </h3>
-            <p className="text-zinc-300 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {project.shortDescription}
+            <p className="text-base text-zinc-300 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {projectTranslation.shortDescription}
             </p>
             
-            <div className="flex items-center mt-4 gap-3 flex-wrap">
-              {project.technologies.map((tech: string, index: number) => (
-                <span key={index} className="text-xs bg-zinc-800 px-2 py-1 rounded-full text-zinc-300">
+            <div className="flex items-center mt-5 gap-3 flex-wrap">
+              {project.technologies.slice(0, 5).map((tech: string, index: number) => (
+                <span key={index} className="text-sm bg-zinc-800 px-3 py-1.5 rounded-full text-zinc-300">
                   {tech}
                 </span>
               ))}
+              {project.technologies.length > 5 && (
+                <span className="text-sm bg-zinc-800 px-3 py-1.5 rounded-full text-zinc-300">
+                  +{project.technologies.length - 5}
+                </span>
+              )}
             </div>
           </div>
           
@@ -127,7 +136,7 @@ const ProjectCard = ({ project, className, delay = 0 }: ProjectCardProps) => {
             <TooltipProvider delayDuration={100}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="absolute right-4 top-4 z-10">
+                  <div className="absolute right-6 top-6 z-10">
                     <Badge variant="sold">
                       Sold
                     </Badge>

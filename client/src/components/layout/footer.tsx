@@ -12,7 +12,7 @@ const Footer = () => {
       className="py-8 bg-zinc-950 border-t border-zinc-800"
     >
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
           <div className="mb-4 md:mb-0">
             <a href="#hero" className="text-xl font-display tracking-wider text-zinc-200">
               MARLLON RAMOS
@@ -35,7 +35,7 @@ const Footer = () => {
         
         <div className="mt-8 pt-6 border-t border-zinc-800 text-center">
           <p className="text-sm text-zinc-500">
-            &copy; {currentYear} | Designed and Developed with <i className="fas fa-heart text-purple-600"></i>
+            &copy; {currentYear} | Designed and Developed with <i className="fas fa-heart text-purple-600"></i> by Marllon Ramos
           </p>
         </div>
       </div>
