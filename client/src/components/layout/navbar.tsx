@@ -65,18 +65,6 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection("about")}
-              className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
-            >
-              {t.nav.about}
-            </button>
-            <button
-              onClick={() => scrollToSection("skills")}
-              className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
-            >
-              {t.nav.skills}
-            </button>
-            <button
               onClick={() => scrollToSection("projects")}
               className="text-sm font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300"
             >
@@ -117,18 +105,6 @@ const Navbar = () => {
             style={{ zIndex: 45 }}
           >
             <div className="container mx-auto px-4 py-8 flex flex-col space-y-6">
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-lg font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"
-              >
-                {t.nav.about}
-              </button>
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="text-lg font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"
-              >
-                {t.nav.skills}
-              </button>
               <button
                 onClick={() => scrollToSection("projects")}
                 className="text-lg font-mono uppercase tracking-widest text-zinc-300 hover:text-zinc-100 transition duration-300 py-2 text-left"

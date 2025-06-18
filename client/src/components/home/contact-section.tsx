@@ -124,194 +124,69 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-24 relative bg-grain">
       <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center" ref={ref}>
+        <div className="max-w-3xl mx-auto">
+          <div ref={ref}>
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-zinc-100 relative inline-block">
-                {t.contact.title}
-                <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-purple-600"></span>
-              </h2>
-              
-              <p className="text-lg text-zinc-300 mb-8">
-                {t.contact.subtitle}
-              </p>
-              
-              <div className="mb-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center mr-4">
-                    <i className="fas fa-envelope text-purple-600"></i>
-                  </div>
-                  <div>
-                    <span className="text-zinc-400 text-sm">{t.contact.email.label}</span>
-                    <a href="mailto:contatomarllonramos@gmail.com" className="block text-zinc-100 hover:text-purple-600 transition-colors">contatomarllonramos@gmail.com</a>
-                  </div>
-                </div>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-zinc-100 relative inline-block">
+                  {t.contact.title}
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-purple-600"></span>
+                </h2>
                 
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center mr-4">
-                    <i className="fab fa-whatsapp text-purple-600"></i>
-                  </div>
-                  <div>
-                    <span className="text-zinc-400 text-sm">{t.contact.whatsapp.label}</span>
-                    <a href="https://wa.me/5521989399832" className="block text-zinc-100 hover:text-purple-600 transition-colors">+55 (21) 98939-9832</a>
-                  </div>
-                </div>
-                
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center mr-4">
-                    <i className="fas fa-map-marker-alt text-purple-600"></i>
-                  </div>
-                  <div>
-                    <span className="text-zinc-400 text-sm">{t.contact.location.label}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-zinc-100">{t.contact.location.basedIn}</span>
-                      <img src="https://flagcdn.com/br.svg" alt="Brazil flag" className="w-5 h-4 inline-block" />
-                    </div>
-                    <span className="block text-sm text-zinc-400">{t.contact.location.available}</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex space-x-4">
-                <a href="https://github.com/marllonramoss" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
-                  <i className="fab fa-github text-zinc-300"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/marllonramos" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
-                  <i className="fab fa-linkedin-in text-zinc-300"></i>
-                </a>
-                <a href="https://wa.me/5521989399832" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
-                  <i className="fab fa-whatsapp text-zinc-300"></i>
-                </a>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <form 
-                onSubmit={handleSubmit}
-                className="relative z-10 bg-zinc-900/80 backdrop-blur-sm p-8 rounded-xl border border-zinc-800"
-              >
-                <h3 className="text-xl font-display font-bold text-zinc-100 mb-6">{t.contact.form.title}</h3>
-                
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-zinc-400 mb-2">
-                    {t.contact.form.replyVia}
-                  </label>
-                  <div className="relative">
-                    <button
-                      type="button"
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-left flex items-center justify-between text-zinc-100 focus:outline-none focus:border-purple-600"
-                    >
-                      <div className="flex items-center">
-                        <i className={`${currentMethod?.icon} text-purple-600 mr-3`}></i>
-                        {currentMethod?.label}
-                      </div>
-                      <i className={`fas fa-chevron-down transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}></i>
-                    </button>
-                    
-                    {isDropdownOpen && (
-                      <div className="absolute w-full mt-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl z-50">
-                        {contactMethods.map(method => (
-                          <button
-                            key={method.id}
-                            type="button"
-                            onClick={() => handleMethodSelect(method.id)}
-                            className="w-full px-4 py-3 flex items-center text-zinc-100 hover:bg-zinc-700 first:rounded-t-lg last:rounded-b-lg"
-                          >
-                            <i className={`${method.icon} text-purple-600 mr-3`}></i>
-                            {method.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <label htmlFor="contactInfo" className="block text-sm font-medium text-zinc-400 mb-2">
-                    {currentMethod?.id === 'whatsapp' ? t.contact.form.whatsappLabel : t.contact.form.emailLabel}
-                  </label>
-                  {currentMethod?.id === 'whatsapp' ? (
-                    <div className="relative">
-                      <button
-                        type="button"
-                        onClick={togglePhoneFormat}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 p-1 hover:bg-zinc-700 rounded transition-colors z-10 flex items-center gap-1 group"
-                        title={phoneFormat === 'BR' ? 'Switch to International format' : 'Mudar para formato brasileiro'}
-                      >
-                        <span className="text-lg">
-                          {phoneFormat === 'BR' ? '🇧🇷' : '🌎'}
-                        </span>
-                        <i className="fas fa-chevron-down text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors"></i>
-                      </button>
-                      <PatternFormat
-                        format={phoneFormats[phoneFormat].format}
-                        value={formData.contactInfo}
-                        onValueChange={(values: NumberFormatValues) => {
-                          setFormData(prev => ({ ...prev, contactInfo: values.value }));
-                        }}
-                        className="w-full pl-16 pr-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-600 text-zinc-100"
-                        placeholder={phoneFormats[phoneFormat].placeholder}
-                        valueIsNumericString
-                      />
-                    </div>
-                  ) :
-                    <input 
-                      type={currentMethod?.inputType}
-                      id="contactInfo"
-                      value={formData.contactInfo}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-600 text-zinc-100"
-                      placeholder={currentMethod?.placeholder}
-                    />
-                  }
-                </div>
-
-                <div className="mb-4">
-                  <label htmlFor="name" className="block text-sm font-medium text-zinc-400 mb-2">{t.contact.form.nameLabel}</label>
-                  <input 
-                    type="text"
-                    id="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-600 text-zinc-100"
-                    placeholder={t.contact.form.namePlaceholder}
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <label htmlFor="message" className="block text-sm font-medium text-zinc-400 mb-2">Quick message</label>
-                  <textarea 
-                    id="message"
-                    rows={3}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-600 text-zinc-100 resize-none"
-                    placeholder={t.contact.form.messagePlaceholder}
-                  ></textarea>
-                </div>
-
-                <button 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-purple-800 text-zinc-100 font-semibold rounded-lg hover-shine hover:shadow-xl transition duration-300 disabled:opacity-70 flex items-center justify-center gap-2"
-                >
-                  <i className={`${currentMethod?.icon}`}></i>
-                  {isSubmitting ? t.contact.form.sendingButton : t.contact.form.sendButton}
-                </button>
-
-                <p className="text-sm text-zinc-400 text-center mt-4">
-                  {t.contact.form.responseTime}
+                <p className="text-lg text-zinc-300 max-w-2xl mx-auto">
+                  {t.contact.subtitle}
                 </p>
-              </form>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div className="flex flex-col items-center text-center">
+                  <a href="mailto:contatomarllonramos@gmail.com" className="group">
+                    <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mb-4 group-hover:bg-zinc-700 transition-colors">
+                      <i className="fas fa-envelope text-purple-600 text-2xl"></i>
+                    </div>
+                  </a>
+                  <span className="text-zinc-400 text-sm mb-2">{t.contact.email.label}</span>
+                  <a href="mailto:contatomarllonramos@gmail.com" className="text-zinc-100 hover:text-purple-600 transition-colors">contatomarllonramos@gmail.com</a>
+                </div>
+                
+                <div className="flex flex-col items-center text-center">
+                  <a href="https://wa.me/5521989399832" target="_blank" rel="noopener noreferrer" className="group">
+                    <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mb-4 group-hover:bg-zinc-700 transition-colors">
+                      <i className="fab fa-whatsapp text-purple-600 text-2xl"></i>
+                    </div>
+                  </a>
+                  <span className="text-zinc-400 text-sm mb-2">{t.contact.whatsapp.label}</span>
+                  <a href="https://wa.me/5521989399832" className="text-zinc-100 hover:text-purple-600 transition-colors">+55 (21) 98939-9832</a>
+                </div>
+                
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mb-4">
+                    <i className="fas fa-map-marker-alt text-purple-600 text-2xl"></i>
+                  </div>
+                  <span className="text-zinc-400 text-sm mb-2">{t.contact.location.label}</span>
+                  <div className="flex items-center gap-2 justify-center">
+                    <span className="text-zinc-100">{t.contact.location.basedIn}</span>
+                    <img src="https://flagcdn.com/br.svg" alt="Brazil flag" className="w-5 h-4 inline-block" />
+                  </div>
+                  <span className="block text-sm text-zinc-400">{t.contact.location.available}</span>
+                </div>
+              </div>
+              
+              <div className="flex justify-center space-x-6">
+                <a href="https://github.com/marllonramoss" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
+                  <i className="fab fa-github text-zinc-300 text-xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/marllonramos" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
+                  <i className="fab fa-linkedin-in text-zinc-300 text-xl"></i>
+                </a>
+                <a href="https://wa.me/5521989399832" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
+                  <i className="fab fa-whatsapp text-zinc-300 text-xl"></i>
+                </a>
+              </div>
             </motion.div>
           </div>
         </div>

@@ -44,15 +44,15 @@ const AboutSection = () => {
                 </div>
               </div>
 
-              <div className="flex items-center bg-zinc-800 px-4 py-3 rounded-lg">
-                <i className="fas fa-paint-brush text-purple-600 mr-3 text-xl"></i>
-                <div>
-                  <h3 className="font-medium text-zinc-200">{t.about.creativeDesign.title}</h3>
-                  <p className="text-sm text-zinc-400">
-                    {t.about.creativeDesign.description}
-                  </p>
-                </div>
-              </div>
+              <a 
+                href="https://drive.google.com/uc?export=download&id=1vxgtwBt4SFSXYsemEED8trqV3GRRp8Jg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg transition-colors duration-300 group"
+              >
+                <i className="fas fa-download text-zinc-100 mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                <span className="text-zinc-100 font-medium">Download CV</span>
+              </a>
             </div>
           </motion.div>
 

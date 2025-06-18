@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from '@/contexts/language-context';
 import { createPortal } from 'react-dom';
+import { useLocation } from 'wouter';
 
 const languages = [
   {
@@ -26,6 +27,7 @@ const LanguageSelector = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [location] = useLocation();
 
   // Encontrar o idioma atual para exibir no botão
   const currentLanguage = languages.find(lang => lang.code === language) || languages[1];
@@ -45,6 +47,9 @@ const LanguageSelector = () => {
 
   // Mostrar tooltip após 3 segundos e escondê-lo após 6 segundos
   useEffect(() => {
+    // Não mostrar o tooltip se estiver na página de projeto
+    if (location.startsWith('/project/')) return;
+
     const showTimer = setTimeout(() => {
       setShowTooltip(true);
     }, 3000);
@@ -57,7 +62,7 @@ const LanguageSelector = () => {
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
     };
-  }, []);
+  }, [location]);
 
   // Fechar dropdown ao clicar fora dele
   useEffect(() => {
@@ -111,7 +116,7 @@ const LanguageSelector = () => {
 
       {/* Tooltip */}
       <AnimatePresence>
-        {showTooltip && !isOpen && (
+        {showTooltip && !isOpen && !location.startsWith('/project/') && (
           <motion.div
             ref={tooltipRef}
             initial={{ opacity: 0, y: 10, scale: 0.9 }}

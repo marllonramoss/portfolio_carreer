@@ -1,13 +1,21 @@
 import { useParams, Link } from "wouter";
 import { projects } from "@/lib/projects-data";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Github, ExternalLink } from "lucide-react";
+import { ChevronLeft, Github, ExternalLink, Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { translations } from "@/lib/translations";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { useState } from "react";
 import PageTransition from "@/components/layout/page-transition";
+import ImageModal from "@/components/ui/image-modal";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 type ContentTab = "overview" | "gallery";
 
@@ -32,6 +40,7 @@ export default function ProjectPage() {
   const t = translations[language];
   const [activeTab, setActiveTab] = useState<ContentTab>("overview");
   const [selectedImage, setSelectedImage] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!project) {
     return (
@@ -114,25 +123,74 @@ export default function ProjectPage() {
                     </div>
                     
                     <div className="flex items-center gap-3">
-                      <a
-                        href={project.repositoryUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-purple-400 rounded-lg transition-all"
-                      >
-                        <Github className="w-5 h-5" />
-                        Repository
-                      </a>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <a
+                              href={project.repositoryUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={cn(
+                                "inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-all",
+                                project.isPrivateRepo
+                                  ? "bg-zinc-800/50 text-zinc-500 cursor-not-allowed"
+                                  : "bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-purple-400"
+                              )}
+                              onClick={(e) => {
+                                if (project.isPrivateRepo) {
+                                  e.preventDefault();
+                                }
+                              }}
+                            >
+                              <Github className={cn("w-5 h-5", project.isPrivateRepo && "opacity-50")} />
+                              Repository
+                              {project.isPrivateRepo && (
+                                <Lock className="w-4 h-4 opacity-50" />
+                              )}
+                            </a>
+                          </TooltipTrigger>
+                          {project.isPrivateRepo && (
+                            <TooltipContent>
+                              <p>Private repository</p>
+                            </TooltipContent>
+                          )}
+                        </Tooltip>
+                      </TooltipProvider>
+
                       {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-purple-400 rounded-lg transition-all"
-                        >
-                          <ExternalLink className="w-5 h-5" />
-                          Live Demo
-                        </a>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={cn(
+                                  "inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-all",
+                                  project.isPrivateLive
+                                    ? "bg-zinc-800/50 text-zinc-500 cursor-not-allowed"
+                                    : "bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-purple-400"
+                                )}
+                                onClick={(e) => {
+                                  if (project.isPrivateLive) {
+                                    e.preventDefault();
+                                  }
+                                }}
+                              >
+                                <ExternalLink className={cn("w-5 h-5", project.isPrivateLive && "opacity-50")} />
+                                Live Demo
+                                {project.isPrivateLive && (
+                                  <Lock className="w-4 h-4 opacity-50" />
+                                )}
+                              </a>
+                            </TooltipTrigger>
+                            {project.isPrivateLive && (
+                              <TooltipContent>
+                                <p>Private demo</p>
+                              </TooltipContent>
+                            )}
+                          </Tooltip>
+                        </TooltipProvider>
                       )}
                     </div>
                   </div>
@@ -268,31 +326,32 @@ export default function ProjectPage() {
                 {activeTab === "gallery" && (
                   <motion.div
                     key="gallery"
-                    className="md:col-span-3"
+                    className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {project.gallery.map((image, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="relative aspect-video rounded-xl overflow-hidden metallic-border cursor-pointer group"
-                          onClick={() => setSelectedImage(index)}
-                        >
-                          <img
-                            src={image}
-                            alt={`${project.title} - Image ${index + 1}`}
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-zinc-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </motion.div>
-                      ))}
-                    </div>
+                    {project.gallery.map((image, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="relative aspect-video overflow-hidden rounded-xl cursor-pointer group"
+                        onClick={() => {
+                          setSelectedImage(index);
+                          setIsModalOpen(true);
+                        }}
+                      >
+                        <img
+                          src={image}
+                          alt={`Gallery image ${index + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </motion.div>
+                    ))}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -302,6 +361,25 @@ export default function ProjectPage() {
 
         <Footer />
       </motion.div>
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        imageUrl={project.gallery[selectedImage]}
+        totalImages={project.gallery.length}
+        currentIndex={selectedImage}
+        onNext={() => {
+          if (selectedImage < project.gallery.length - 1) {
+            setSelectedImage(selectedImage + 1);
+          }
+        }}
+        onPrevious={() => {
+          if (selectedImage > 0) {
+            setSelectedImage(selectedImage - 1);
+          }
+        }}
+      />
     </PageTransition>
   );
 } 

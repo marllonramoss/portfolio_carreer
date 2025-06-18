@@ -3,6 +3,12 @@ import { motion } from "framer-motion";
 import { useScrollObserver } from "@/hooks/use-scroll-observer";
 import ProjectCard from "@/components/ui/project-card";
 import { projects } from "@/lib/projects-data";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const ProjectsSection = () => {
   const [ref, isVisible] = useScrollObserver<HTMLDivElement>({
@@ -57,16 +63,6 @@ const ProjectsSection = () => {
             </button>
             <button
               className={`px-4 py-2 ${
-                filter === "mobile"
-                  ? "bg-purple-600 text-zinc-100 hover:bg-purple-600" 
-                  : "bg-zinc-800 hover:bg-zinc-700"
-              } rounded-lg text-zinc-300 transition-all duration-300 hover:scale-105`}
-              onClick={() => setFilter("mobile")}
-            >
-              Mobile
-            </button>
-            <button
-              className={`px-4 py-2 ${
                 filter === "design"
                   ? "bg-purple-600 text-zinc-100 hover:bg-purple-600" 
                   : "bg-zinc-800 hover:bg-zinc-700"
@@ -93,14 +89,21 @@ const ProjectsSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mt-12"
         >
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 border border-zinc-600 text-zinc-200 font-semibold rounded-lg hero-button-shine hover:border-zinc-400 transition duration-300 hover:scale-105"
-          >
-            View All Projects
-          </a>
+          <TooltipProvider delayDuration={100}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className="inline-block px-6 py-3 border border-zinc-600 text-zinc-500 font-semibold rounded-lg cursor-not-allowed opacity-50"
+                  disabled
+                >
+                  View All Projects
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Em breve. Subindo novos projetos.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </motion.div>
       </div>
     </section>
