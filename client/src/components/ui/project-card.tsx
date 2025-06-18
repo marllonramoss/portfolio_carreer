@@ -143,7 +143,7 @@ const ProjectCard = ({ project, className, delay = 0 }: ProjectCardProps) => {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Projeto vendido para cliente real</p>
+                  <p>Projeto vendido para cliente</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
