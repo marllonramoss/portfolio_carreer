@@ -34,7 +34,7 @@ export const projects: Project[] = [
     videoUrl: "https://res.cloudinary.com/du55aj4g9/video/upload/v1750205664/8DDC2024-AD78-4C2B-88E2-2AB51F3FCE94_video_l5qbsv.mp4",
     technologies: ["React", "Express", "Vite", "Docker", "Tailwind", "N8N", "React Helmet"],
     repositoryUrl: "https://github.com/your-project-repo",
-    liveUrl: "https://www.your-project-live.com",
+    liveUrl: "https://gilimoveis.com",
     isSold: true,
     isPrivateRepo: true,
     isPrivateLive: false,
